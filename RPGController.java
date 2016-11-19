@@ -32,7 +32,7 @@ public class RPGController extends WindowController implements ActionListener, K
   public void begin(){
     GUISetup();
     getSprites();
-    
+
     world1 = new RPGWorld( getImage("images/map1.png"), canvas);
     mainChar = new RPGMainChar(grid(9,6), mainCharSprites, canvas, world1);
     potion = new RPGPiece(grid(8,10), getImage("images/potion.png"), canvas, world1);
@@ -115,4 +115,4 @@ public class RPGController extends WindowController implements ActionListener, K
     mainCharSprites[2] = getImage("images/snorlax-left.png");
     mainCharSprites[3] = getImage("images/snorlax-right.png");
   }
-}
+} //addded something
