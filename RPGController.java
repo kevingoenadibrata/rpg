@@ -115,4 +115,4 @@ public class RPGController extends WindowController implements ActionListener, K
     mainCharSprites[2] = getImage("images/snorlax-left.png");
     mainCharSprites[3] = getImage("images/snorlax-right.png");
   }
-} //addded something
+} //chnges
