@@ -16,7 +16,6 @@ public class RPGController extends WindowController implements ActionListener, K
   private RPGMainChar mainChar;
   private RPGWorld world1;
   private JButton getid, exit;
-  private ArrayList<Coordinate> blockedWorld1;
   private Image[] mainCharSprites;
 
   //main
@@ -33,12 +32,10 @@ public class RPGController extends WindowController implements ActionListener, K
     GUISetup();
     getSprites();
 
-    world1 = new RPGWorld( getImage("images/map1.png"), canvas);
+    world1 = new RPGWorld( getImage("images/map1.png"), "blockedWorld1.txt", canvas);
     mainChar = new RPGMainChar(grid(9,6), mainCharSprites, canvas, world1);
     potion = new RPGPiece(grid(8,10), getImage("images/potion.png"), canvas, world1);
-
-    blockedWorld1 = new ArrayList<>();
-
+    world1.addSecretObject(11,5);
 
     this.requestFocus();
     this.requestFocusInWindow();
