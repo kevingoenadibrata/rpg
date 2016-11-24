@@ -31,7 +31,7 @@ public class RPGText extends ActiveObject {
   public void removeText(){
     text.removeFromCanvas();
     contIcon.removeFromCanvas();
-  }
+  }//text
 
 
 }
