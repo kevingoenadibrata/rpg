@@ -11,15 +11,19 @@ public class RPGMainChar extends ActiveObject {
   private int[] locID;
   private boolean[][] locBool;
   private RPGWorld world;
+  private RPGText textbox;
+  private RPGController controller;
   private int dx, dy;
-  private boolean moving;
+  private boolean talk = false;
   private Image[] sprites;
   private String facing = new String("DOWN");
 
-  public RPGMainChar ( Location paramLoc, Image[] paramSprites, DrawingCanvas canvas, RPGWorld world) {
+  public RPGMainChar ( Location paramLoc, Image[] paramSprites, DrawingCanvas canvas, RPGWorld world, RPGText textbox, RPGController controller) {
     loc = paramLoc;
     sprites = paramSprites;
     this.world = world;
+    this.textbox = textbox;
+    this.controller = controller;
 
     piece = new VisibleImage(sprites[1], loc, canvas);
 
@@ -40,7 +44,16 @@ public class RPGMainChar extends ActiveObject {
     if(facing == "DOWN"){col = locID[0]; row = locID[1] +1;}
     if(facing == "LEFT"){col = locID[0]-1; row = locID[1];}
     if(facing == "RIGHT"){col = locID[0]+1; row = locID[1];}
-    if(world.isObject(col, row)){System.out.println("TALK");}
+    if(world.isObject(col, row)){
+      textbox.addText();
+      talk = true;
+      controller.setTalk(talk);
+    }
+  }
+  public void continueText(){
+    textbox.removeText();
+    talk = false;
+    controller.setTalk(talk);
   }
   public void up(){
   piece.setImage(sprites[0]);

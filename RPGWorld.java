@@ -17,7 +17,6 @@ public class RPGWorld extends ActiveObject {
     initializeBool(accessBool, true);
     initializeBool(objectBool, false);
     readAccess(blockLoc);
-    printBool(accessBool);
   }
 
   public void initializeBool(boolean[][] bool, boolean value){
