@@ -35,7 +35,7 @@ public class RPGController extends WindowController implements ActionListener, K
   public void begin(){
     GUISetup();
     getSprites();
-    ((JDrawingCanvas) canvas).setBackground( Color.BLACK );
+    ((JDrawingCanvas) canvas).setBackground(new Color(49, 56, 47));
 
     try {f = Font.createFont( Font.TRUETYPE_FONT, new FileInputStream("assets/font.ttf"));}
     catch(IOException|FontFormatException e){
