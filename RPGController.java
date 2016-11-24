@@ -15,7 +15,7 @@ public class RPGController extends WindowController implements ActionListener, K
   private static final Color blue = new Color(53, 135, 176);
 
   //variables
-  private RPGPiece potion;
+  // private RPGPiece potion;
   private RPGMainChar mainChar;
   private RPGWorld world1;
   private RPGText textbox;
@@ -23,6 +23,7 @@ public class RPGController extends WindowController implements ActionListener, K
   private Image[] mainCharSprites;
   private Font f;
   private Boolean talking = false;
+  public ArrayList<RPGPiece> pieces = new ArrayList<RPGPiece>();
 
   //main
   public static void main( String[] args ) {
@@ -46,9 +47,9 @@ public class RPGController extends WindowController implements ActionListener, K
     world1 = new RPGWorld( getImage("images/map1.png"), "blockedWorld1.txt", canvas);
     textbox = new RPGText(f, getImage("images/textbox.png"), getImage("images/contIcon.gif"), canvas);
     mainChar = new RPGMainChar(grid(8,5), mainCharSprites, canvas, world1, textbox, this);
-    potion = new RPGPiece(grid(7,7), getImage("images/potion.png"), canvas, world1);
+    pieces.add(new RPGPiece("potion", "This is a potion", grid(7,7), getImage("images/potion.png"), canvas, world1));
 
-    world1.addSecretObject(11,5);
+    // world1.addSecretObject(11,5);
 
     this.requestFocus();
     this.requestFocusInWindow();
@@ -91,8 +92,9 @@ public class RPGController extends WindowController implements ActionListener, K
       }
     }
     else if(keyCode == KeyEvent.VK_SPACE){
-      if(!talking)
+      if(!talking){
         mainChar.interact();
+      }
       else
         mainChar.continueText();
 

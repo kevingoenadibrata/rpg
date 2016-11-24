@@ -20,8 +20,8 @@ public class RPGText extends ActiveObject {
     textbox = new VisibleImage(image, loc, canvas);
   }
 
-  public void addText(){
-    text = new Text("This is a text.", loc.getX() + 25, loc.getY() + 25, canvas);
+  public void addText(String message){
+    text = new Text(message, loc.getX() + 25, loc.getY() + 25, canvas);
     text.setFont(f);
     text.setFontSize(40);
     text.setColor(new Color(49, 56, 47));
