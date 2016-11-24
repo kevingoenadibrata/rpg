@@ -55,10 +55,6 @@ public class RPGController extends WindowController implements ActionListener, K
   }
 
 
-
-
-
-
   public void actionPerformed(ActionEvent evt) {
     if(evt.getSource() == getid){
       getID(mainChar);

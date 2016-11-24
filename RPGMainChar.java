@@ -45,6 +45,7 @@ public class RPGMainChar extends ActiveObject {
     if(facing == "LEFT"){col = locID[0]-1; row = locID[1];}
     if(facing == "RIGHT"){col = locID[0]+1; row = locID[1];}
     if(world.isObject(col, row)){
+      System.out.println(col + " " + row);
       textbox.addText();
       talk = true;
       controller.setTalk(talk);
