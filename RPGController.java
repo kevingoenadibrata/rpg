@@ -45,8 +45,8 @@ public class RPGController extends WindowController implements ActionListener, K
 
     world1 = new RPGWorld( getImage("images/map1.png"), "blockedWorld1.txt", canvas);
     textbox = new RPGText(f, getImage("images/textbox.png"), getImage("images/contIcon.gif"), canvas);
-    mainChar = new RPGMainChar(grid(9,6), mainCharSprites, canvas, world1, textbox, this);
-    potion = new RPGPiece(grid(8,8), getImage("images/potion.png"), canvas, world1);
+    mainChar = new RPGMainChar(grid(8,5), mainCharSprites, canvas, world1, textbox, this);
+    potion = new RPGPiece(grid(7,7), getImage("images/potion.png"), canvas, world1);
 
     world1.addSecretObject(11,5);
 
@@ -118,7 +118,7 @@ public class RPGController extends WindowController implements ActionListener, K
   }
 
   public Location grid(int col, int row){
-    Location position = new Location(50*(col-1), 50*(row-1));
+    Location position = new Location(50*(col), 50*(row));
     return position;
   }
 
