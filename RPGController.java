@@ -10,18 +10,19 @@ import java.io.IOException;
 
 public class RPGController extends WindowController implements ActionListener, KeyListener{
   //constants
-  private static final int CANVAS_WIDTH = 800;
+  private static final int CANVAS_WIDTH = 1050;
   private static final int CANVAS_HEIGHT = 750;
   private static final Color blue = new Color(53, 135, 176);
 
   //variables
-  // private RPGPiece potion;
   private RPGMainChar mainChar;
   private RPGWorld world1;
   private RPGText textbox;
+  private VisibleImage sidebar;
   private JButton getid, exit;
   private Image[] mainCharSprites;
   private Font f;
+  private String mode = "walking";
   private Boolean talking = false;
   public ArrayList<RPGPiece> pieces = new ArrayList<RPGPiece>();
 
@@ -34,9 +35,10 @@ public class RPGController extends WindowController implements ActionListener, K
 
   //methods
   public void begin(){
+
     GUISetup();
     getSprites();
-    ((JDrawingCanvas) canvas).setBackground(new Color(49, 56, 47));
+    ((JDrawingCanvas) canvas).setBackground(new Color(0, 127, 123));
 
     try {f = Font.createFont( Font.TRUETYPE_FONT, new FileInputStream("assets/font.ttf"));}
     catch(IOException|FontFormatException e){
@@ -48,8 +50,7 @@ public class RPGController extends WindowController implements ActionListener, K
     textbox = new RPGText(f, getImage("images/textbox.png"), getImage("images/contIcon.gif"), canvas);
     mainChar = new RPGMainChar(grid(8,5), mainCharSprites, canvas, world1, textbox, this);
     pieces.add(new RPGPiece("potion", "This is a potion", grid(7,7), getImage("images/potion.png"), canvas, world1));
-
-    // world1.addSecretObject(11,5);
+    sidebar = new VisibleImage(getImage("images/sidebar.png"), grid(16,0), canvas);
 
     this.requestFocus();
     this.requestFocusInWindow();
@@ -68,36 +69,37 @@ public class RPGController extends WindowController implements ActionListener, K
   public void keyPressed(KeyEvent e){
     int keyCode = e.getKeyCode();
     if(keyCode == KeyEvent.VK_UP || keyCode == KeyEvent.VK_W){
-      if(!talking){
+      if(mode.equals("walking")){
         mainChar.up();
         mainChar.changeFacing("UP");
       }
     }
     else if(keyCode == KeyEvent.VK_DOWN || keyCode == KeyEvent.VK_S){
-      if(!talking){
+      if(mode.equals("walking")){
         mainChar.down();
         mainChar.changeFacing("DOWN");
       }
     }
     else if(keyCode == KeyEvent.VK_LEFT || keyCode == KeyEvent.VK_A){
-      if(!talking){
+      if(mode.equals("walking")){
         mainChar.left();
         mainChar.changeFacing("LEFT");
       }
     }
     else if(keyCode == KeyEvent.VK_RIGHT || keyCode == KeyEvent.VK_D){
-      if(!talking){
+      if(mode.equals("walking")){
         mainChar.right();
         mainChar.changeFacing("RIGHT");
       }
     }
     else if(keyCode == KeyEvent.VK_SPACE){
-      if(!talking){
+      if(mode.equals("walking")){
         mainChar.interact();
       }
-      else
+      else if(mode.equals("talking")){
         mainChar.continueText();
-
+        mode = "walking";
+      }
     }
     this.requestFocus();
     this.requestFocusInWindow();
@@ -125,7 +127,7 @@ public class RPGController extends WindowController implements ActionListener, K
   }
 
   public void getID(RPGMainChar piece){
-    System.out.println("ID: " + piece.getID(0) + ", " + piece.getID(1));
+    System.out.println("ID: (" + piece.getID(0) + "," + piece.getID(1) + ")");
   }
 
   public void getSprites(){
@@ -136,7 +138,11 @@ public class RPGController extends WindowController implements ActionListener, K
     mainCharSprites[3] = getImage("images/snorlax-right.png");
   }
 
-  public void setTalk(boolean bool){
-    talking = bool;
+  public void setMode(String mode){
+    this.mode = mode;
   }
-} //chnges
+  public String getMode(){
+    return this.mode;
+  }
+
+}

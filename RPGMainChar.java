@@ -52,16 +52,14 @@ public class RPGMainChar extends ActiveObject {
           textbox.addText(controller.pieces.get(i).getPieceMessage());
         }
       }
-      // textbox.addText();
-      talk = true;
-      controller.setTalk(talk);
+      controller.setMode("talking");
     }
   }
+
   public void continueText(){
     textbox.removeText();
-    talk = false;
-    controller.setTalk(talk);
   }
+
   public void up(){
   piece.setImage(sprites[0]);
     if(world.isAccessable(locID[0], locID[1]-1)){
