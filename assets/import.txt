@@ -1,0 +1,25 @@
+*
+potion
+this is a potion.
+7
+7
+potion.png
+
+elixir
+this is an elixir.
+9
+10
+elixir.png
+
+npc_kevin
+Hi, new guy. I am kevin!
+8
+8
+npc_kevin.png
+
+*
+plant
+water me...
+10
+4
+plant.png
