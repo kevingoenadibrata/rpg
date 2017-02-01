@@ -37,11 +37,8 @@ public class RPGController extends WindowController implements ActionListener, K
 
   //methods
   public void begin(){
-
     GUISetup();
-
     ((JDrawingCanvas) canvas).setBackground(new Color(0, 127, 123));
-
     importElements();
     this.requestFocus();
     this.requestFocusInWindow();
@@ -49,10 +46,7 @@ public class RPGController extends WindowController implements ActionListener, K
 
 
   public void actionPerformed(ActionEvent evt) {
-    if(evt.getSource() == getid){
-      getID(mainChar);
-    }
-    else if(evt.getSource() == exit){
+    if(evt.getSource() == exit){
       System.exit(1);
     }
   }
@@ -97,7 +91,8 @@ public class RPGController extends WindowController implements ActionListener, K
       }
     }
     else if(keyCode == KeyEvent.VK_Z){
-      getID(mainChar);
+      //develop purposes
+      world1.unblockWorld();
     }
     this.requestFocus();
     this.requestFocusInWindow();
@@ -108,15 +103,12 @@ public class RPGController extends WindowController implements ActionListener, K
 
   public void GUISetup(){
     JPanel southPanel = new JPanel();
-    getid = new JButton("GET ID");
     exit = new JButton("EXIT GAME");
     id = new JLabel("( 0 , 0 )");
-    getid.addActionListener(this);
     exit.addActionListener(this);
     this.addKeyListener(this);
     canvas.addKeyListener(this);
     southPanel.add(id);
-    southPanel.add(getid);
     southPanel.add(exit);
     this.add(southPanel, BorderLayout.SOUTH);
   }
@@ -157,11 +149,13 @@ public class RPGController extends WindowController implements ActionListener, K
     }
 
     getSprites();
-    world1 = new RPGWorld( getImage("images/map1.png"), "blockedWorld1.txt", canvas);
+    // world1 = new RPGWorld( getImage("images/map1.png"), "blockedWorld1.txt", canvas);
+    world1 = new RPGWorld( getImage("images/mapTest.png"), "blockedWorld1.txt", canvas);
     textbox = new RPGText(f, getImage("images/textbox.png"), getImage("images/contIcon.gif"), canvas);
     mainChar = new RPGMainChar(grid(8,5), mainCharSprites, canvas, world1, textbox, this);
     sidebar = new VisibleImage(getImage("images/sidebar.png"), grid(16,0), canvas);
 
     pieces.add(new RPGPiece("potion", "This is a potion", grid(7,7), getImage("images/potion.png"), canvas, world1));
+    pieces.add(new RPGPiece("potion", "text", grid(8,9), getImage("images/potion.png"), canvas, world1));
   }
 }

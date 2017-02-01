@@ -66,12 +66,18 @@ public class RPGMainChar extends ActiveObject {
       piece.move(0,-SIZE);
       locID[1]--;
     }
+    else if(locID[1]-1 < 0){
+      world.moveMap("UP");
+    }
   }
   public void down(){
   piece.setImage(sprites[1]);
     if(world.isAccessable(locID[0], locID[1]+1)){
       piece.move(0,SIZE);
       locID[1]++;
+    }
+    else if(locID[1]+1 > 10){
+      world.moveMap("DOWN");
     }
   }
   public void left(){
@@ -80,12 +86,18 @@ public class RPGMainChar extends ActiveObject {
       piece.move(-SIZE,0);
       locID[0]--;
     }
+    else if(locID[0]-1 < 0){
+      world.moveMap("LEFT");
+    }
   }
   public void right(){
     piece.setImage(sprites[3]);
     if(world.isAccessable(locID[0]+1, locID[1])){
       piece.move(SIZE,0);
       locID[0]++;
+    }
+    else if(locID[0]+1 > 15){
+      world.moveMap("RIGHT");
     }
   }
   public int getID(int i){
