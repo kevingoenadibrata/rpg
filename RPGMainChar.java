@@ -101,8 +101,13 @@ public class RPGMainChar extends ActiveObject {
     }
   }
   public int getID(int i){
-    if(i == 0){return locID[0];}
-    else if(i == 1){return locID[1];}
-    else{return 0;}
+    return locID[i];
+  }
+  public void setID(int i, int val){
+    locID[i] = val;
+  }
+
+  public void moveObj(int dx, int dy){
+    piece.move(dx,dy);
   }
 } //end of File

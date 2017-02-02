@@ -140,8 +140,15 @@ public class RPGController extends WindowController implements ActionListener, K
     return this.mode;
   }
 
-  public void importElements(){
+  public void moveObj(int dx, int dy){
+    mainChar.moveObj(dx,dy);
+  }
+  public void setcharID(int i, int val){
+    mainChar.setID(i,val);
+  }
 
+
+  public void importElements(){
     try {f = Font.createFont( Font.TRUETYPE_FONT, new FileInputStream("assets/font.ttf"));}
     catch(IOException|FontFormatException e){
       System.out.println("Error with File IO.");
@@ -149,8 +156,8 @@ public class RPGController extends WindowController implements ActionListener, K
     }
 
     getSprites();
-    // world1 = new RPGWorld( getImage("images/map1.png"), "blockedWorld1.txt", canvas);
-    world1 = new RPGWorld( getImage("images/mapTest.png"), "blockedWorld1.txt", canvas);
+    // world1 = new RPGWorld( getImage("images/map1.png"), "blockedWorld1.txt", canvas, this);
+    world1 = new RPGWorld( getImage("images/mapTest.png"), "blockedWorld1.txt", canvas, this);
     textbox = new RPGText(f, getImage("images/textbox.png"), getImage("images/contIcon.gif"), canvas);
     mainChar = new RPGMainChar(grid(8,5), mainCharSprites, canvas, world1, textbox, this);
     sidebar = new VisibleImage(getImage("images/sidebar.png"), grid(16,0), canvas);

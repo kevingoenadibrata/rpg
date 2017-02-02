@@ -8,9 +8,12 @@ public class RPGWorld extends ActiveObject {
   private boolean[][] accessBool, objectBool;
   private VisibleImage bg;
   private int horFactor, verFactor, howMuch;
+  private RPGController controller;
+  private boolean running = false;
 
-  public RPGWorld (Image img, String blockLoc, DrawingCanvas canvas) {
+  public RPGWorld (Image img, String blockLoc, DrawingCanvas canvas, RPGController controller) {
     bg = new VisibleImage(img, 0, 0, canvas);
+    this.controller = controller;
 
     accessBool = new boolean[16][11];
     objectBool = new boolean[16][11];
@@ -18,7 +21,7 @@ public class RPGWorld extends ActiveObject {
     initializeBool(accessBool, true);
     initializeBool(objectBool, false);
     readAccess(blockLoc);
-    printBool(accessBool);
+    // printBool(accessBool);
     start();
   }
 
@@ -89,21 +92,45 @@ public class RPGWorld extends ActiveObject {
     verFactor = 0;
     howMuch = 0;
 
-    if(dir == "UP"){verFactor = 1; howMuch = 11*50;}
-    else if(dir == "DOWN"){verFactor = -1; howMuch = 11*50;}
-    else if(dir == "LEFT"){horFactor = 1; howMuch = 16*50;}
-    else if(dir == "RIGHT"){horFactor = -1; howMuch = 16*50;}
+    if(dir == "UP"){
+      verFactor = 1;
+      howMuch = 11*50;
+      controller.setcharID(1, 10);
+    }
+    else if(dir == "DOWN"){
+      verFactor = -1;
+      howMuch = 11*50;
+      controller.setcharID(1, 0);
+    }
+    else if(dir == "LEFT"){
+      horFactor = 1;
+      howMuch = 16*50;
+      controller.setcharID(0, 15);
+    }
+    else if(dir == "RIGHT"){
+      horFactor = -1;
+      howMuch = 16*50;
+      controller.setcharID(0, 0);
+    }
+    running = true;
   }
 
   public void run(){
     while(true){
-      for(int i = 0; i < howMuch; i++){
-        bg.move(horFactor, verFactor);
-        pause(2);
+      while(running){
+        for(int i = 0; i < howMuch; i++){
+          controller.setMode("moving");
+          bg.move(horFactor, verFactor);
+          controller.moveObj(horFactor, verFactor);
+          pause(2);
+        }
+        controller.moveObj(horFactor * -50, verFactor * -50);
+        controller.setMode("walking");
+        horFactor = 0;
+        verFactor = 0;
+        howMuch = 0;
+        running = false;
       }
-      horFactor = 0;
-      verFactor = 0;
-      howMuch = 0;
       pause(1);
     }
   }
